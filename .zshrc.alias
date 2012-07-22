@@ -1,0 +1,37 @@
+# ls
+alias ls="ls -GF"
+alias la="ls -a"
+alias lf="ls -F"
+alias ll="ls -l"
+
+# du/df
+alias du="du -h"
+alias df="df -h"
+alias dud="du -d 1"
+
+# su
+alias su="su -l"
+
+# vim
+alias v="vim"
+
+# emacs
+alias emacs="emacsclient"
+
+# git
+alias g="git"
+alias gi="git"
+alias gs="git status -s -b"
+alias gc="git commit"
+alias gci="git commit -a"
+
+# rm/cp/mv
+alias rm="rm -i"
+alias cp="cp -i"
+alias mv="mv -i"
+
+# push/pop
+alias pd="pushd"
+alias po="popd"
+
+alias ev="vi ~/dotfiles/.vimrc"

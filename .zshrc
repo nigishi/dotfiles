@@ -92,23 +92,6 @@ SAVEHIS=$HISTSIZE
 #setopt inc_append_history
 #setopt share_history
 
-# alias config
-alias ls="ls -GF"
-alias ll="ls -lGF"
-alias la="ls -lhAFG"
-
-alias rm="rm -i"
-alias cp="cp -i"
-alias mv="mv -i"
-
-alias pd="pushd"
-alias po="popd"
-
-alias du="du -h"
-
-#alias emacs="/usr/local/Cellar/emacs/23.3a/Emacs.app/Contents/MacOS/Emacs -nw"
-alias emacs="emacsclient"
-
 ### プロンプトバーの左側
 ###   %{%B%}...%{%b%}: 「...」を太字にする。
 ###   %{%F{cyan}%}...%{%f%}: 「...」をシアン色の文字にする。
@@ -220,3 +203,12 @@ fi
 
 ## コマンド実行前に呼び出されるフック。
 precmd_functions=($precmd_functions update_prompt)
+
+## alias
+[[ -f ~/dotfiles/.zshrc.alias ]] && source ~/dotfiles/.zshrc.alias
+
+## Mac
+[[ -f ~/dotfiles/.zshrc.osx ]]   && source ~/dotfiles/.zshrc.osx
+
+## local
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

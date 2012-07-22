@@ -1,6 +1,6 @@
 dotfiles
 ========
-## セットアップ方法
+### setup
 
 ln -s dotfiles/.zshrc .zshrc  
 ln -s dotfiles/.vimrc .vimrc

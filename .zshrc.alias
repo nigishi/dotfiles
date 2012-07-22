@@ -21,6 +21,7 @@ alias emacs="emacsclient"
 # git
 alias g="git"
 alias gi="git"
+alias gl="git log"
 alias gs="git status -s -b"
 alias gc="git commit"
 alias gci="git commit -a"

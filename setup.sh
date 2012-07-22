@@ -1,6 +1,6 @@
 #!/usr/local/bin/zsh
 
-DOT_FILES=( .zshrc .gitconfig .gitignore .vimrc )
+DOT_FILES=( .zshrc .vimrc .gitconfig .gitignore .dir_colors )
 
 for file in ${DOT_FILES[*]}
 do

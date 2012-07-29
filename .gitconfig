@@ -1,5 +1,20 @@
 [user]
 	name = Yamamoto Yusuke
 	email = y.yamamoto88@gmail.com
+[color]
+	status = auto
+	diff = auto
+	interactive = auto
+	grep = auto
+[core]
+	excludesfile = ~/.gitignore
+	editor = vim
+[alias]
+	s = status
+	st = status
+	ss = status -s
+	sh = show
+	so = remote show origin
+	po = push origin
 [credential]
 	helper = osxkeychain

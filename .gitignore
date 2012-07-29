@@ -1,0 +1,13 @@
+build/*
+
+*~.nib
+*.swp
+
+.DS_Store
+tags
+TAGS
+*.log
+*.elc
+
+*.xcworkspace
+xcuserdata

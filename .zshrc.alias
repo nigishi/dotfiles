@@ -26,6 +26,9 @@ alias gs="git status -s -b"
 alias gc="git commit"
 alias gci="git commit -a"
 
+# tmux
+alias tm="tmux"
+
 # rm/cp/mv
 alias rm="rm -i"
 alias cp="cp -i"

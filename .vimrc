@@ -59,3 +59,10 @@ noremap : ;
 
 " パラグラフ内の数値をインクリメントする
 :command! AreaIncr norm vip:norm <C-V><C-A><CR>
+
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+let vimclojure#WantNailgun = 1
+let vimclojure#NailgunClient = "ng"

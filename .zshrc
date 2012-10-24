@@ -7,29 +7,28 @@ bindkey -e
 setopt auto_cd
 
 # 補完
-autoload -U compinit
-compinit
+autoload -U compinit && compinit -u
 
-## カーソル位置で補完する。
-setopt complete_in_word
-## globを展開しないで候補の一覧から補完する。
-#setopt glob_complete
-## 補完時にヒストリを自動的に展開する。
-setopt hist_expand
-## 補完候補がないときなどにビープ音を鳴らさない。
-setopt no_beep
-## 辞書順ではなく数字順に並べる。
-setopt numeric_glob_sort
+# 補完に関するオプション
+setopt auto_param_slash      # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
+setopt mark_dirs             # ファイル名の展開でディレクトリにマッチした場合 末尾に / を付加
+setopt list_types            # 補完候補一覧でファイルの種別を識別マーク表示 (訳注:ls -F の記号)
+setopt auto_menu             # 補完キー連打で順に補完候補を自動で補完
+setopt auto_param_keys       # カッコの対応などを自動的に補完
+setopt interactive_comments  # コマンドラインでも # 以降をコメントと見なす
+setopt magic_equal_subst     # コマンドラインの引数で --prefix=/usr などの = 以降でも補完できる
 
-# 展開
-## --prefix=~/localというように「=」の後でも
-## 「~」や「=コマンド」などのファイル名展開を行う。
-setopt magic_equal_subst
-## 拡張globを有効にする。
-## glob中で「(#...)」という書式で指定する。
-setopt extended_glob
-## globでパスを生成したときに、パスがディレクトリだったら最後に「/」をつける。
-setopt mark_dirs
+setopt complete_in_word      # 語の途中でもカーソル位置で補完
+setopt always_last_prompt    # カーソル位置は保持したままファイル名一覧を順次その場で表示
+
+setopt print_eight_bit       # 日本語ファイル名等8ビットを通す
+setopt extended_glob         # 拡張グロブで補完(~とか^とか。例えばless *.txt~memo.txt ならmemo.txt 以外の *.txt にマッチ)
+setopt globdots              # 明確なドットの指定なしで.から始まるファイルをマッチ
+
+setopt no_beep               # 補完候補がないときなどにビープ音を鳴らさない。
+setopt list_packed           # 補完候補リストを詰めて表示
+setopt auto_list             # 補完候補が複数ある時に、一覧表示する
+
 
 ## 補完方法毎にグループ化する。
 ### 補完方法の表示方法
@@ -72,14 +71,6 @@ zstyle ':completion:sudo:*' environ PATH="$SUDO_PATH:$PATH"
 
 setopt auto_pushd
 setopt pushd_ignore_dups
-
-dir(){
- dirs -v
- echo -n "select number "
- read newdir
- cd +"$newdir"
-}
- 
 setopt correct
 cdpath=(~)
 chpwd_functions=($chpwd_functions dirs)
@@ -92,117 +83,48 @@ SAVEHIS=$HISTSIZE
 #setopt inc_append_history
 #setopt share_history
 
-### プロンプトバーの左側
-###   %{%B%}...%{%b%}: 「...」を太字にする。
-###   %{%F{cyan}%}...%{%f%}: 「...」をシアン色の文字にする。
-###   %n: ユーザ名
-###   %m: ホスト名（完全なホスト名ではなくて短いホスト名）
-###   %{%B%F{white}%(?.%K{green}.%K{red})%}%?%{%f%k%b%}:
-###                           最後に実行したコマンドが正常終了していれば
-###                           太字で白文字で緑背景にして異常終了していれば
-###                           太字で白文字で赤背景にする。
-###   %{%F{white}%}: 白文字にする。
-###     %(x.true-text.false-text): xが真のときはtrue-textになり
-###                                偽のときはfalse-textになる。
-###       ?: 最後に実行したコマンドの終了ステータスが0のときに真になる。
-###       %K{green}: 緑景色にする。
-###       %K{red}: 赤景色を赤にする。
-###   %?: 最後に実行したコマンドの終了ステータス
-###   %{%k%}: 背景色を元に戻す。
-###   %{%f%}: 文字の色を元に戻す。
-###   %{%b%}: 太字を元に戻す。
-###   %D{%Y/%m/%d %H:%M}: 日付。「年/月/日 時:分」というフォーマット。
-prompt_self="%{%B%}%n%{%b%}"
-prompt_bar_left_status="(%{%B%F{white}%(?.%K{green}.%K{red})%}%?%{%k%f%b%})"
-prompt_bar_left_date="<%{%B%}%D{%Y/%m/%d %H:%M}%{%b%}>"
-prompt_bar_left="-${prompt_self}-${prompt_bar_left_status}-${prompt_bar_left_date}-"
-### プロンプトバーの右側
-###   %{%B%K{magenta}%F{white}%}...%{%f%k%b%}:
-###       「...」を太字のマジェンタ背景の白文字にする。
-###   %d: カレントディレクトリのフルパス（省略しない）
-prompt_bar_right="-[%{%B%K{magenta}%F{white}%}%d%{%f%k%b%}]-"
+# 便利なプロンプト。
+setopt prompt_subst
+autoload colors
+colors
 
-### 2行目左にでるプロンプト。
-###   %h: ヒストリ数。
-###   %(1j,(%j),): 実行中のジョブ数が1つ以上ある場合だけ「(%j)」を表示。
-###     %j: 実行中のジョブ数。
-###   %{%B%}...%{%b%}: 「...」を太字にする。
-###   %#: 一般ユーザなら「%」、rootユーザなら「#」になる。
-prompt_left="-%(1j,(%j),)%{%B%}%#%{%b%} "
+# 色の定義
+local DEFAULT=$'%{\e[1;0m%}'
+local RESET="%{${reset_color}%}"
+local GREEN="%{${fg[green]}%}"
+local BLUE="%{${fg[blue]}%}"
+local RED="%{${fg[red]}%}"
+local CYAN="%{${fg[cyan]}%}"
+local LIGHT_BLUE=$'%{^[[1;36m%}'$
+local WHITE="%{${fg[white]}%}"
 
-count_prompt_characters()
-{
-    # print:
-    #   -P: プロンプトフォーマットを展開する。
-    #   -n: 改行をつけない。
-    # sed:
-    #   -e $'s/\e\[[0-9;]*m//g': ANSIエスケープシーケンスを削除。
-    # wc:
-    #   -c: 文字数を出力する。
-    # sed:
-    #   -e 's/ //g': *BSDやMac OS Xのwcは数字の前に空白を出力するので削除する。
-    print -n -P -- "$1" | sed -e $'s/\e\[[0-9;]*m//g' | wc -m | sed -e 's/ //g'
+## バージョン管理システムの情報も表示する
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' formats \
+  '(%{%F{white}%K{green}%}%s%{%f%k%})-[%{%F{white}%K{blue}%}%b%{%f%k%}]'
+zstyle ':vcs_info:*' actionformats \
+  '(%{%F{white}%K{green}%}%s%{%f%k%})-[%{%F{white}%K{blue}%}%b%{%f%k%}|%{%F{white}%K{red}%}%a%{%f%k%}]'
+
+precmd () {
+  psvar=()
+  LANG=en_US.UTF-8 vcs_info
+  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 
-update_prompt()
-{
-    # プロンプトバーの左側の文字数を数える。
-    # 左側では最後に実行したコマンドの終了ステータスを使って
-    # いるのでこれは一番最初に実行しなければいけない。そうし
-    # ないと、最後に実行したコマンドの終了ステータスが消えて
-    # しまう。
-    local bar_left_length=$(count_prompt_characters "$prompt_bar_left")
-    # プロンプトバーに使える残り文字を計算する。
-    # $COLUMNSにはターミナルの横幅が入っている。
-    local bar_rest_length=$[COLUMNS - bar_left_length]
-
-    local bar_left="$prompt_bar_left"
-    # パスに展開される「%d」を削除。
-    local bar_right_without_path="${prompt_bar_right:s/%d//}"
-    # 「%d」を抜いた文字数を計算する。
-    local bar_right_without_path_length=$(count_prompt_characters "$bar_right_without_path")
-    # パスの最大長を計算する。
-    #   $[...]: 「...」を算術演算した結果で展開する。
-    local max_path_length=$[bar_rest_length - bar_right_without_path_length]
-    # パスに展開される「%d」に最大文字数制限をつける。
-    #   %d -> %(C,%${max_path_length}<...<%d%<<,)
-    #     %(x,true-text,false-text):
-    #         xが真のときはtrue-textになり偽のときはfalse-textになる。
-    #         ここでは、「%N<...<%d%<<」の効果をこの範囲だけに限定させる
-    #         ために用いているだけなので、xは必ず真になる条件を指定している。
-    #       C: 現在の絶対パスが/以下にあると真。なので必ず真になる。
-    #       %${max_path_length}<...<%d%<<:
-    #          「%d」が「${max_path_length}」カラムより長かったら、
-    #          長い分を削除して「...」にする。最終的に「...」も含めて
-    #          「${max_path_length}」カラムより長くなることはない。
-    bar_right=${prompt_bar_right:s/%d/%(C,%${max_path_length}<...<%d%<<,)/}
-    # 「${bar_rest_length}」文字分の「-」を作っている。
-    # どうせ後で切り詰めるので十分に長い文字列を作っているだけ。
-    # 文字数はざっくり。
-    local separator="${(l:${bar_rest_length}::-:)}"
-    # プロンプトバー全体を「${bar_rest_length}」カラム分にする。
-    #   %${bar_rest_length}<<...%<<:
-    #     「...」を最大で「${bar_rest_length}」カラムにする。
-    bar_right="%${bar_rest_length}<<${separator}${bar_right}%<<"
-
-    # プロンプトバーと左プロンプトを設定
-    #   "${bar_left}${bar_right}": プロンプトバー
-    #   $'\n': 改行
-    #   "${prompt_left}": 2行目左のプロンプト
-    PROMPT="${bar_left}${bar_right}"$'\n'"${prompt_left}"
-    # 右プロンプト
-    #   %{%B%F{white}%K{green}}...%{%k%f%b%}:
-    #       「...」を太字で緑背景の白文字にする。
-    #   %~: カレントディレクトリのフルパス（可能なら「~」で省略する）
-    RPROMPT="[%{%B%F{white}%K{magenta}%}%~%{%k%f%b%}]"
-}
+#bar_left="%{${CYAN}%}${USER}($?) ${RESET}${WHITE}$ ${RESET}"
+bar_left_self="(%{%B%}%n%{%b%})"
+bar_left_status="(%{%B%F{white}%(?.%K{green}.%K{red})%}%?%{%k%f%b%})"
+bar_left_date="<%{%B%}%D{%Y/%m/%d %H:%M}%{%b%}>"
+bar_left="-${bar_left_self}-${bar_left_status}-${bar_left_date}-"
+prompt_left="-[%h]%(1j,(%j),) %{%F{cyan}%}%# %{%f%}"
+PROMPT="${bar_left}"$'\n'"${prompt_left}"
+#RPROMPT='${RESET}${WHITE}[${GREEN}%(5~,%-2~/.../%2~,%~)% ${WHITE}]${RESET}'
+#RPROMPT="%1(v|%F{green}%1v%f|)"
+RPROMPT="[%{%B%F{white}%K{magenta}%}%~%{%k%f%b%}]"
 
 if [ -f `brew --prefix`/etc/autojump ]; then
   . `brew --prefix`/etc/autojump
 fi
-
-## コマンド実行前に呼び出されるフック。
-precmd_functions=($precmd_functions update_prompt)
 
 ## alias
 [[ -f ~/dotfiles/.zshrc.alias ]] && source ~/dotfiles/.zshrc.alias

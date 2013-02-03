@@ -1,5 +1,5 @@
 # PATH
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:~/shell:$PATH
 
 # Terminal Colorの設定
 export CLICOLOR=1

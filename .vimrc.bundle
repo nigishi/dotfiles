@@ -16,6 +16,7 @@
  NeoBundle 'Shougo/unite.vim'
  NeoBundle 'vim-scripts/VimClojure'
  NeoBundle 'thinca/vim-ft-clojure'
+ NeoBundle 'Lokaltog/vim-powerline'
 
  " My Bundles here:
  "

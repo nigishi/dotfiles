@@ -29,7 +29,6 @@ setopt no_beep               # 補完候補がないときなどにビープ音�
 setopt list_packed           # 補完候補リストを詰めて表示
 setopt auto_list             # 補完候補が複数ある時に、一覧表示する
 
-
 ## 補完方法毎にグループ化する。
 ### 補完方法の表示方法
 ###   %B...%b: 「...」を太字にする。
@@ -105,26 +104,43 @@ zstyle ':vcs_info:*' formats \
 zstyle ':vcs_info:*' actionformats \
   '(%{%F{white}%K{green}%}%s%{%f%k%})-[%{%F{white}%K{blue}%}%b%{%f%k%}|%{%F{white}%K{red}%}%a%{%f%k%}]'
 
-precmd () {
-  psvar=()
-  LANG=en_US.UTF-8 vcs_info
-  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-}
+#precmd () {
+#  psvar=()
+#  LANG=en_US.UTF-8 vcs_info
+#  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+#}
 
 #bar_left="%{${CYAN}%}${USER}($?) ${RESET}${WHITE}$ ${RESET}"
-bar_left_self="(%{%B%}%n%{%b%})"
-bar_left_status="(%{%B%F{white}%(?.%K{green}.%K{red})%}%?%{%k%f%b%})"
-bar_left_date="<%{%B%}%D{%Y/%m/%d %H:%M}%{%b%}>"
-bar_left="-${bar_left_self}-${bar_left_status}-${bar_left_date}-"
-prompt_left="-[%h]%(1j,(%j),) %{%F{cyan}%}%# %{%f%}"
-PROMPT="${bar_left}"$'\n'"${prompt_left}"
+#bar_left_self="(%{%B%}%n%{%b%})"
+#bar_left_status="(%{%B%F{white}%(?.%K{green}.%K{red})%}%?%{%k%f%b%})"
+#bar_left_date="<%{%B%}%D{%Y/%m/%d %H:%M}%{%b%}>"
+#bar_left="-${bar_left_self}-${bar_left_status}-${bar_left_date}-"
+#prompt_left="-[%h]%(1j,(%j),) %{%F{cyan}%}%# %{%f%}"
+#PROMPT="${bar_left}"$'\n'"${prompt_left}"
 #RPROMPT='${RESET}${WHITE}[${GREEN}%(5~,%-2~/.../%2~,%~)% ${WHITE}]${RESET}'
 #RPROMPT="%1(v|%F{green}%1v%f|)"
-RPROMPT="[%{%B%F{white}%K{magenta}%}%~%{%k%f%b%}]"
+#RPROMPT="[%{%B%F{white}%K{magenta}%}%~%{%k%f%b%}]"
 
-if [ -f `brew --prefix`/etc/autojump ]; then
-  . `brew --prefix`/etc/autojump
-fi
+#if [ -f `brew --prefix`/etc/autojump ]; then
+#  . `brew --prefix`/etc/autojump
+#fi
+#
+#function powerline_precmd() {
+#  export PS1="$(~/powerline-shell.py $? --shell zsh)"
+#}
+#
+#function install_powerline_precmd() {
+#  for s in "${precmd_functions[@]}"; do
+#    if [ "$s" = "powerline_precmd" ]; then
+#      return
+#    fi
+#  done
+#  precmd_functions+=(powerline_precmd)
+#}
+#
+#install_powerline_precmd
+
+#PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 
 ## alias
 [[ -f ~/dotfiles/.zshrc.alias ]] && source ~/dotfiles/.zshrc.alias
@@ -134,3 +150,5 @@ fi
 
 ## local
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+alias mylist='find `pwd` -maxdepth 1 -mindepth 1 | grep -v "\/\." > mylist'

@@ -12,11 +12,18 @@ alias dud="du -d 1"
 # su
 alias su="su -l"
 
+# java
+alias javac='javac -J-Dfile.encoding=UTF-8'
+alias java='java -Dfile.encoding=UTF-8'
+
 # vim
 alias v="vim"
 
 # emacs
 alias emacs="emacsclient"
+
+# Sublime Text 2
+alias subl="'/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl'"
 
 # git
 alias g="git"
@@ -39,3 +46,4 @@ alias pd="pushd"
 alias po="popd"
 
 alias ev="vi ~/dotfiles/.vimrc"
+alias eza="vi ~/dotfiles/.zshrc.alias"

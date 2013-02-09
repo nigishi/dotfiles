@@ -15,3 +15,9 @@ export JAVA_HOME=/Library/Java/Home
 export PATH=$JAVA_HOME/bin:$PATH
 # デフォルトエンコーディングSJISをUTF-8へ
 #export _JAVA_OPTIONS="-Dfile.encoding=UTF-8"
+
+alias tmux='tmuxx'
+alias tm='tmuxx'
+alias tma='tmux attach'
+alias tml='tmux list-window'
+

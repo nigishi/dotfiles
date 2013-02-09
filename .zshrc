@@ -121,10 +121,6 @@ RPROMPT='${RESET}${WHITE}[${GREEN}%(5~,%-2~/.../%2~,%~)% ${WHITE}]${RESET}'
 RPROMPT="%1(v|%F{green}%1v%f|)"
 RPROMPT="[%{%B%F{white}%K{magenta}%}%~%{%k%f%b%}]"
 
-if [ -f `brew --prefix`/etc/autojump ]; then
-  . `brew --prefix`/etc/autojump
-fi
-
 #function powerline_precmd() {
 #  export PS1="$(~/powerline-shell.py $? --shell zsh)"
 #}
@@ -148,11 +144,11 @@ fi
 case "${OSTYPE}" in
 ## Mac
 darwin*)
-  [ -f ~/dotfiles/.zshrc.osx ] && source ~/dotfiles/.zshrc.osx
+  [ -f ~/.zshrc.osx ] && source ~/.zshrc.osx
   ;;
 ## Linux
 linux*)
-  [ -f ~/dotfiles/.zshrc.linux ] && source ~/dotfiles/.zshrc.linux
+  [ -f ~/.zshrc.linux ] && source ~/.zshrc.linux
   ;;
 esac
 ## local

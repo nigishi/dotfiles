@@ -17,5 +17,17 @@
 	sh = show
 	so = remote show origin
 	po = push origin
+  # commit
+  ad  = add
+  c   = commit
+  ci  = commit -a
+  cam = commit -a --amend
+  co  = checkout
+  cb  = checkout -b
+  # branch
+  br  = branch
+  ba  = branch -a
+  # log
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 [credential]
 	helper = osxkeychain

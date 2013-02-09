@@ -110,21 +110,21 @@ zstyle ':vcs_info:*' actionformats \
 #  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 #}
 
-#bar_left="%{${CYAN}%}${USER}($?) ${RESET}${WHITE}$ ${RESET}"
-#bar_left_self="(%{%B%}%n%{%b%})"
-#bar_left_status="(%{%B%F{white}%(?.%K{green}.%K{red})%}%?%{%k%f%b%})"
-#bar_left_date="<%{%B%}%D{%Y/%m/%d %H:%M}%{%b%}>"
-#bar_left="-${bar_left_self}-${bar_left_status}-${bar_left_date}-"
-#prompt_left="-[%h]%(1j,(%j),) %{%F{cyan}%}%# %{%f%}"
-#PROMPT="${bar_left}"$'\n'"${prompt_left}"
-#RPROMPT='${RESET}${WHITE}[${GREEN}%(5~,%-2~/.../%2~,%~)% ${WHITE}]${RESET}'
-#RPROMPT="%1(v|%F{green}%1v%f|)"
-#RPROMPT="[%{%B%F{white}%K{magenta}%}%~%{%k%f%b%}]"
+bar_left="%{${CYAN}%}${USER}($?) ${RESET}${WHITE}$ ${RESET}"
+bar_left_self="(%{%B%}%n%{%b%})"
+bar_left_status="(%{%B%F{white}%(?.%K{green}.%K{red})%}%?%{%k%f%b%})"
+bar_left_date="<%{%B%}%D{%Y/%m/%d %H:%M}%{%b%}>"
+bar_left="-${bar_left_self}-${bar_left_status}-${bar_left_date}-"
+prompt_left="-[%h]%(1j,(%j),) %{%F{cyan}%}%# %{%f%}"
+PROMPT="${bar_left}"$'\n'"${prompt_left}"
+RPROMPT='${RESET}${WHITE}[${GREEN}%(5~,%-2~/.../%2~,%~)% ${WHITE}]${RESET}'
+RPROMPT="%1(v|%F{green}%1v%f|)"
+RPROMPT="[%{%B%F{white}%K{magenta}%}%~%{%k%f%b%}]"
 
-#if [ -f `brew --prefix`/etc/autojump ]; then
-#  . `brew --prefix`/etc/autojump
-#fi
-#
+if [ -f `brew --prefix`/etc/autojump ]; then
+  . `brew --prefix`/etc/autojump
+fi
+
 #function powerline_precmd() {
 #  export PS1="$(~/powerline-shell.py $? --shell zsh)"
 #}
@@ -145,10 +145,17 @@ zstyle ':vcs_info:*' actionformats \
 ## alias
 [[ -f ~/dotfiles/.zshrc.alias ]] && source ~/dotfiles/.zshrc.alias
 
+case "${OSTYPE}" in
 ## Mac
-[[ -f ~/dotfiles/.zshrc.osx ]]   && source ~/dotfiles/.zshrc.osx
-
+darwin*)
+  [ -f ~/dotfiles/.zshrc.osx ] && source ~/dotfiles/.zshrc.osx
+  ;;
+## Linux
+linux*)
+  [ -f ~/dotfiles/.zshrc.linux ] && source ~/dotfiles/.zshrc.linux
+  ;;
+esac
 ## local
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 alias mylist='find `pwd` -maxdepth 1 -mindepth 1 | grep -v "\/\." > mylist'

@@ -17,6 +17,10 @@
  NeoBundle 'vim-scripts/VimClojure'
  NeoBundle 'thinca/vim-ft-clojure'
  NeoBundle 'Lokaltog/vim-powerline'
+ NeoBundle 'mattn/zencoding-vim'
+
+ " clojure
+ NeoBundle 'slimv.vim'
 
  " My Bundles here:
  "

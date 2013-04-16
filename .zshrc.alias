@@ -36,6 +36,9 @@ alias gci="git commit -a"
 # tmux
 alias tm="tmux"
 
+# brew 
+alias b="brew"
+
 # rm/cp/mv
 alias rm="rm -i"
 alias cp="cp -i"

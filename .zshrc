@@ -74,13 +74,13 @@ setopt correct
 cdpath=(~)
 chpwd_functions=($chpwd_functions dirs)
 HISTFILE=~/.zsh_history
-HISTSIZE=10000000
+HISTSIZE=100000
 SAVEHIS=$HISTSIZE
-#setopt extended_history
-#setopt hist_ignore_dups
-#setopt hist_ignore_space
-#setopt inc_append_history
-#setopt share_history
+setopt extended_history
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt inc_append_history
+setopt share_history
 
 # 便利なプロンプト。
 setopt prompt_subst
@@ -155,3 +155,5 @@ esac
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 alias mylist='find `pwd` -maxdepth 1 -mindepth 1 | grep -v "\/\." > mylist'
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

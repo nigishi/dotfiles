@@ -64,5 +64,7 @@ if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-let vimclojure#WantNailgun = 1
-let vimclojure#NailgunClient = "ng"
+"let vimclojure#WantNailgun = 1
+"let vimclojure#NailgunClient = "ng"
+
+let g:slimv_swank_clojure = '!osascript -e "tell app \"iTerm\"" -e "tell the first terminal" -e "set mysession to current session" -e "launch session \"Default Session\"" -e "tell the last session" -e "exec command \"/usr/local/bin/zsh\"" -e "write text \"cd $(pwd)\"" -e "write text \"lein swank\"" -e "end tell" -e "select mysession" -e "end tell" -e "end tell"'

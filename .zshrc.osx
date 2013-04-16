@@ -1,5 +1,5 @@
 # PATH
-export PATH=/usr/local/bin:/usr/local/sbin:~/shell:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:~/shell:/usr/local/Cellar/ruby/1.9.3-p392/bin:$PATH
 
 # Terminal Colorの設定
 export CLICOLOR=1

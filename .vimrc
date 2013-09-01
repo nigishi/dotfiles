@@ -13,7 +13,7 @@ source ~/dotfiles/.vimrc.colors
 " vim-fuzzy-finder設定
 source ~/dotfiles/.vimrc.fuf
 
-:call pathogen#runtime_append_all_bundles()
+" :call pathogen#runtime_append_all_bundles()
 
 " 検索結果のハイライトをESC連打で消す
 set hlsearch
@@ -64,7 +64,12 @@ if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-"let vimclojure#WantNailgun = 1
-"let vimclojure#NailgunClient = "ng"
+" VimClojure
+let vimclojure#HighlightBuiltins = 1
+let vimclojure#HIghlightContrib = 1
+let vimclojure#DynamicHighighting = 1
+let vimclojure#ParenRainbow = 1
+let vimclojure#WantNailgun = 1
+let vimclojure#NailgunClient = "/usr/local/bin/ng"
 
 let g:slimv_swank_clojure = '!osascript -e "tell app \"iTerm\"" -e "tell the first terminal" -e "set mysession to current session" -e "launch session \"Default Session\"" -e "tell the last session" -e "exec command \"/usr/local/bin/zsh\"" -e "write text \"cd $(pwd)\"" -e "write text \"lein swank\"" -e "end tell" -e "select mysession" -e "end tell" -e "end tell"'

@@ -38,6 +38,8 @@ alias tm="tmux"
 
 # brew 
 alias b="brew"
+alias bup="brew update"
+alias bug="brew upgrade"
 
 # rm/cp/mv
 alias rm="rm -i"

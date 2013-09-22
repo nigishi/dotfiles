@@ -138,6 +138,7 @@ RPROMPT="[%{%B%F{white}%K{magenta}%}%~%{%k%f%b%}]"
 
 #PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 
+# tmuxの自動起動
 if [ -z "$TMUX" -a -z "$STY" ]; then
     if type tmuxx >/dev/null 2>&1; then
         tmuxx
@@ -147,8 +148,6 @@ if [ -z "$TMUX" -a -z "$STY" ]; then
         else
             tmux new-session && echo "tmux created new session"
         fi
-    elif type screen >/dev/null 2>&1; then
-        screen -rx || screen -D -RR
     fi
 fi
 

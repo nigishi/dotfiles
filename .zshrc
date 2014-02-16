@@ -6,6 +6,9 @@ bindkey -e
 # ディレクトリ名でcdする
 setopt auto_cd
 
+# autojump
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+
 # 補完
 autoload -U compinit && compinit -u
 
@@ -28,6 +31,7 @@ setopt globdots              # 明確なドットの指定なしで.から始ま
 setopt no_beep               # 補完候補がないときなどにビープ音を鳴らさない。
 setopt list_packed           # 補完候補リストを詰めて表示
 setopt auto_list             # 補完候補が複数ある時に、一覧表示する
+setopt nonomatch
 
 ## 補完方法毎にグループ化する。
 ### 補完方法の表示方法
@@ -138,21 +142,15 @@ RPROMPT="[%{%B%F{white}%K{magenta}%}%~%{%k%f%b%}]"
 
 #PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 
-# tmuxの自動起動
-if [ -z "$TMUX" -a -z "$STY" ]; then
-    if type tmuxx >/dev/null 2>&1; then
-        tmuxx
-    elif type tmux >/dev/null 2>&1; then
-        if tmux has-session && tmux list-sessions | /usr/bin/grep -qE '.*]$'; then
-            tmux attach && echo "tmux attached session "
-        else
-            tmux new-session && echo "tmux created new session"
-        fi
-    fi
-fi
+source /Users/ymmty/src/auto-fu.zsh/auto-fu.zsh
+function zle-line-init () {
+  auto-fu-init
+}
+zle -N zle-line-init
+zstyle ':auto-fu:var' postdisplay $''
 
 ## alias
-[[ -f ~/dotfiles/.zshrc.alias ]] && source ~/dotfiles/.zshrc.alias
+[[ -f ~/src/dotfiles/.zshrc.alias ]] && source ~/src/dotfiles/.zshrc.alias
 
 case "${OSTYPE}" in
 ## Mac
@@ -166,6 +164,9 @@ linux*)
 esac
 ## local
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+## boxen
+[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
 
 alias mylist='find `pwd` -maxdepth 1 -mindepth 1 | grep -v "\/\." > mylist'
 

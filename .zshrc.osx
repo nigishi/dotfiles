@@ -1,14 +1,14 @@
 # PATH
-export PATH=/usr/local/bin:/usr/local/sbin:~/shell:/usr/local/Cellar/ruby/2.0.0-p247/bin:~/bin/:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:~/shell:/usr/local/Cellar/ruby/2.0.0-p247/bin:~/bin:/opt/boxen/homebrew/bin:/Library/Ruby/Gems/2.0.0/:$PATH
 
 # Terminal Colorの設定
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
 # vim
-export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
-alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+#export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+#alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+#alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 
 # Java
 export JAVA_HOME=$(/usr/libexec/java_home)
@@ -22,6 +22,33 @@ alias tm='tmuxx'
 alias tma='tmux attach'
 alias tml='tmux list-window'
 
-if [ -f `brew --prefix`/etc/autojump ]; then
-  . `brew --prefix`/etc/autojump
+# tmuxの自動起動
+if [ -z "$TMUX" ]; then
+    if type tmuxx >/dev/null 3>&1; then
+        tmuxx
+    elif type tmux >/dev/null 2>&1; then
+        if tmux has-session && tmux list-sessions | /usr/bin/grep -qE '.*]$'; then
+            tmux attach && echo "tmux attached session "
+        else
+            tmux new-session && echo "tmux created new session"
+        fi
+    fi
 fi
+
+function brew_all_update() {
+  BREW=/opt/boxen/homebrew/bin/brew
+  if [[ `uname` -eq "Darwin" ]] && [[ -f "$BREW" ]]; then
+    ${BREW} update
+    ${BREW} upgrade
+    ${BREW} cleanup --force
+  else
+    echo "not Darwin"
+    return 1;
+  fi
+  return 0;
+}
+brew_all_update;
+
+# z.sh
+_Z_CMD=j
+source $(brew --prefix)/etc/profile.d/z.sh

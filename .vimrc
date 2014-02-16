@@ -1,17 +1,17 @@
 " NeoBundle設定
-source ~/dotfiles/.vimrc.bundle
+source ~/src/dotfiles/.vimrc.bundle
 
 " 基本設定
-source ~/dotfiles/.vimrc.basic
+source ~/src/dotfiles/.vimrc.basic
 
 " StatusLine設定
-source ~/dotfiles/.vimrc.statusline
+source ~/src/dotfiles/.vimrc.statusline
 
 " Color関連
-source ~/dotfiles/.vimrc.colors
+source ~/src/dotfiles/.vimrc.colors
 
 " vim-fuzzy-finder設定
-source ~/dotfiles/.vimrc.fuf
+source ~/src/dotfiles/.vimrc.fuf
 
 " :call pathogen#runtime_append_all_bundles()
 

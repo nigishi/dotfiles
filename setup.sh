@@ -4,5 +4,5 @@ DOT_FILES=( .zshrc .zshrc.alias .zshrc.osx .zshrc.linux .vimrc .gitconfig .gitig
 
 for file in ${DOT_FILES[*]}
 do
-  ln -s $HOME/dotfiles/$file $HOME/$file
+  ln -fs `pwd`/$file $HOME/$file
 done

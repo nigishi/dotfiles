@@ -8,7 +8,7 @@
 	grep = auto
 	ui = true
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = /opt/boxen/config/git/gitignore
 	editor = vim
 [alias]
 	s = status
@@ -30,4 +30,13 @@
   # log
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 [credential]
-	helper = osxkeychain
+	helper = /opt/boxen/bin/boxen-git-credential
+
+[hub]
+protocol = https
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

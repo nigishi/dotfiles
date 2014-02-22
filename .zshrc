@@ -149,6 +149,9 @@ function zle-line-init () {
 zle -N zle-line-init
 zstyle ':auto-fu:var' postdisplay $''
 
+# python env
+source /opt/boxen/homebrew/bin/virtualenvwrapper.sh
+
 ## alias
 [[ -f ~/src/dotfiles/.zshrc.alias ]] && source ~/src/dotfiles/.zshrc.alias
 

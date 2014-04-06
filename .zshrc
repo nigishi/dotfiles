@@ -139,16 +139,6 @@ RPROMPT="[%{%B%F{white}%K{magenta}%}%~%{%k%f%b%}]"
 
 #PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 
-source ~/src/auto-fu.zsh/auto-fu.zsh
-function zle-line-init () {
-  auto-fu-init
-}
-zle -N zle-line-init
-zstyle ':auto-fu:var' postdisplay $''
-
-# python env
-source /opt/boxen/homebrew/bin/virtualenvwrapper.sh
-
 ## alias
 [[ -f ~/src/dotfiles/.zshrc.alias ]] && source ~/src/dotfiles/.zshrc.alias
 

@@ -22,6 +22,9 @@ alias tm='tmuxx'
 alias tma='tmux attach'
 alias tml='tmux list-window'
 
+# autojump
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+
 # tmuxの自動起動
 if [ -z "$TMUX" ]; then
     if type tmuxx >/dev/null 3>&1; then

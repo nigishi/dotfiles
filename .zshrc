@@ -6,9 +6,6 @@ bindkey -e
 # ディレクトリ名でcdする
 setopt auto_cd
 
-# autojump
-[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
-
 # 補完
 autoload -U compinit && compinit -u
 
@@ -142,7 +139,7 @@ RPROMPT="[%{%B%F{white}%K{magenta}%}%~%{%k%f%b%}]"
 
 #PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 
-source /Users/ymmty/src/auto-fu.zsh/auto-fu.zsh
+source ~/src/auto-fu.zsh/auto-fu.zsh
 function zle-line-init () {
   auto-fu-init
 }

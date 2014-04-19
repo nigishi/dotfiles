@@ -18,6 +18,7 @@
  NeoBundle 'thinca/vim-ft-clojure'
  NeoBundle 'Lokaltog/vim-powerline'
  NeoBundle 'mattn/zencoding-vim'
+ NeoBundle 'flazz/vim-colorschemes'
 
  " clojure
  NeoBundle 'slimv.vim'

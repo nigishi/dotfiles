@@ -18,6 +18,7 @@ alias java='java -Dfile.encoding=UTF-8'
 
 # vim
 alias v="vim"
+alias vi="vim"
 
 # emacs
 alias emacs="emacsclient"

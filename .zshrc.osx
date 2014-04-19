@@ -17,7 +17,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 #export _JAVA_OPTIONS="-Dfile.encoding=UTF-8"
 
 # tmux
-alias tmux='tmuxx'
+#alias tmux='tmuxx'
 alias tm='tmuxx'
 alias tma='tmux attach'
 alias tml='tmux list-window'
@@ -33,34 +33,20 @@ zle -N zle-line-init
 zstyle ':auto-fu:var' postdisplay $''
 
 # python env
-source /opt/boxen/homebrew/bin/virtualenvwrapper.sh
+#source /opt/boxen/homebrew/bin/virtualenvwrapper.sh
 
 # tmuxの自動起動
-if [ -z "$TMUX" ]; then
-    if type tmuxx >/dev/null 3>&1; then
-        tmuxx
-    elif type tmux >/dev/null 2>&1; then
-        if tmux has-session && tmux list-sessions | /usr/bin/grep -qE '.*]$'; then
-            tmux attach && echo "tmux attached session "
-        else
-            tmux new-session && echo "tmux created new session"
-        fi
-    fi
-fi
-
-function brew_all_update() {
-  BREW=/opt/boxen/homebrew/bin/brew
-  if [[ `uname` -eq "Darwin" ]] && [[ -f "$BREW" ]]; then
-    ${BREW} update
-    ${BREW} upgrade
-    ${BREW} cleanup --force
-  else
-    echo "not Darwin"
-    return 1;
-  fi
-  return 0;
-}
-brew_all_update;
+#if [ -z "$TMUX" ]; then
+#    if type tmuxx >/dev/null 3>&1; then
+#        tmuxx
+#    elif type tmux >/dev/null 2>&1; then
+#        if tmux has-session && tmux list-sessions | /usr/bin/grep -qE '.*]#$'; then
+#            tmux attach && echo "tmux attached session "
+#        else
+#            tmux new-session && echo "tmux created new session"
+#        fi
+#    fi
+#fi
 
 # z.sh
 _Z_CMD=j

@@ -1,75 +1,179 @@
-" NeoBundle設定
-source ~/src/dotfiles/.vimrc.bundle
+"   __  __ _ _____ _________
+"   "   \ \ | |_|     V  __/  __|
+"   "    \ \| | | | | | |  | [__
+"   " [_] \___|_|_|_|_|_|  \____|
+"
+"
+" Encoding {{{
+set encoding=utf-8
+scriptencoding utf-8
+" }}}
 
-" 基本設定
-source ~/src/dotfiles/.vimrc.basic
+" MyVimrc {{{
+augroup MyVimrc
+  autocmd!
+augroup END
 
-" StatusLine設定
-source ~/src/dotfiles/.vimrc.statusline
+" NeoBundle {{{
+if has('vim_starting')
+  set nocompatible
+  set runtimepath& runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+call neobundle#rc(expand('~/.vim/bundle/'))
+NeoBundleFetch 'Shougo/neobundle.vim'
 
-" Color関連
-source ~/src/dotfiles/.vimrc.colors
+" Unite {{{
+NeoBundleLazy 'Shougo/unite.vim'
+NeoBundleLazy 'Shougo/unite-help'
+NeoBundleLazy 'ujihisa/unite-colorscheme'
+NeoBundleLazy 'Shougo/unite-outline'
+NeoBundleLazy 'osyo-manga/unite-fold'
+NeoBundleLazy 'kmnk/vim-unite-giti'
+NeoBundleLazy 'thinca/vim-unite-history'
+NeoBundleLazy 'osyo-manga/unite-quickfix'
+" }}}
 
-" vim-fuzzy-finder設定
-source ~/src/dotfiles/.vimrc.fuf
+NeoBundleLazy 'Shougo/vimfiler.vim'
+NeoBundleLazy 'Shougo/vimshell.vim'
 
-" :call pathogen#runtime_append_all_bundles()
+" Writing {{{
+" neocomplete {{{
+if has('lua') && v:version >= 703
+  NeoBundleLazy 'Shougo/neocomplete.vim'
+else
+  NeoBundleLazy 'Shougo/neocomplcache.vim'
+endif
+" }}}
 
-" 検索結果のハイライトをESC連打で消す
+NeoBundleLazy 'Shougo/neosnippet.vim'
+NeoBundleLazy 'mattn/emmet-vim'
+NeoBundleLazy 'deris/vim-rengbang'
+NeoBundleLazy 'h1mesuke/vim-alignta'
+NeoBundleLazy 'autodate.vim'
+NeoBundleLazy 'tyru/caw.vim'
+" }}}
+
+" Development {{{
+NeoBundleLazy 'thinca/vim-quickrun'
+NeoBundleLazy 'scrooloose/syntastic'
+NeoBundleLazy 'koron/codic-vim'
+NeoBundleLazy 'rhysd/unite-codic.vim'
+" }}}
+
 set hlsearch
 noremap <ESC><ESC> :nohlsearch<CR><ESC>
 
-" ステータスラインの設定
-:set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
-:set laststatus=2
+set number
 
-" コロンセミコロン入れ替え
-noremap ; :
-noremap : ;
+" ColorScheme {{{
+NeoBundle 'tomasr/molokai'
+NeoBundle 'vim-scripts/Wombat'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'vim-scripts/twilight'
+NeoBundle 'jonathanfilip/vim-lucius'
+NeoBundle 'jpo/vim-railscasts-theme'
+NeoBundle 'vim-scripts/rdark'
+NeoBundle 'djjcast/mirodark'
+NeoBundle 'sjl/badwolf'
+NeoBundle 'cocopon/iceberg.vim' " A dark color scheme for Vim, came from Antarctica
+NeoBundle 'reedes/vim-colors-pencil'
+"}}}
 
-" 行番号表示
-:set number
+" Git {{{
+NeoBundle 'tpope/vim-fugitive'
+NeoBundleLazy 'gregsexton/gitv'
+NeoBundle 'mhinz/vim-signify'
 
-" インデントをスペースに
-:set expandtab
+NeoBundleLazy 'thinca/vim-openbuf'
+NeoBundleLazy 'Shougo/vim-vcs', {
+      \ 'depends' : 'thinca/vim-openbuf',
+      \ 'autoload' : {'commands' : 'Vcs'},
+      \ }
+"}}}
 
-" インデント関連
-:set tabstop=2
-:set shiftwidth=2
-:set autoindent
-:set smartindent
+" UI {{{
+NeoBundle 'itchyny/lightline.vim'
+NeoBundleLazy 'nathanaelkane/vim-indent-guides'
+NeoBundleLazy 't9md/vim-quickhl' " quickly highlight <cword> or visually selected word
+"TODO
+NeoBundleLazy 'osyo-manga/vim-automatic', {
+    \ 'depends' : [ 'osyo-manga/vim-gift', 'osyo-manga/vim-reunions' ] }
+" }}}
 
-" インクリメンタルサーチ
-:set incsearch
+" Filetype {{{
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'wavded/vim-stylus'
+NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'plasticboy/vim-markdown'
 
-" 大文字小文字を区別しない
-:set ignorecase
+" Python {{{
+NeoBundleLazy 'davidhalter/jedi-vim'
+NeoBundleLazy 'heavenshell/vim-pydocstring'
+NeoBundleLazy 'tell-k/vim-autopep8'
+NeoBundleLazy 'hynek/vim-python-pep8-indent'
+"}}}
 
-" 短縮入力
-:inoreabbrev _mail y.yamamoto88@gmail.com
-:inoreabbrev <expr> dl repeat('*', 80)
-:inoreabbrev <expr> mdy strftime("%Y-%m-%d")
+" END NeoBundle}}}
 
-" スクリーンキャプチャ取得用に画面を設定する
-:command! CaptureView set nonumber nolist nowrap lines=40 columns=86 noshowcmd
-    \ cmdheight=1 showtabline=0 | colorscheme koehler
+" Tab Basic Settings {{{
+set autoindent "Copy indent from current line when starting a new line
+set expandtab "Use the appropriate number of spaces to insert a <Tab>
+set shiftround "Round indent to multiple of 'shiftwidth'
+set shiftwidth=4 "Number of spaces to use for each step of (auto)indent
+set softtabstop=4 "Number of spaces that a <Tab> counts for while editing operations
+set tabstop=4 "Number of spaces that a <Tab> in the file counts for
+"}}}
 
-" 余分な半角スペースを削除する
-:command! RmWhiteSpace :%s/^ *$//
+" Search Basic Settings {{{
+set incsearch "Incremental searching
+set ignorecase "Ignore case in search patterns
+set smartcase "Override the ignorecase option if the pattern contains upper case
+set hlsearch | nohlsearch "Highlight search patterns, support reloading
+"}}}
 
-" パラグラフ内の数値をインクリメントする
-:command! AreaIncr norm vip:norm <C-V><C-A><CR>
+" Backup Settings {{{
+"Don't create backup
+set nobackup "Don't make a backup before overwriting a file
+set nowritebackup "Don't make a backup before overwriting a file
+set backupdir-=. "List of directories for the backup file
+"}}}
 
-if has("autocmd")
-    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" Colorscheme {{{
+if has('vim_starting')
+    syntax enable
+    set t_Co=256
+    if &t_Co < 256
+        colorscheme default
+    else
+        try
+            colorscheme jellybeans
+        catch
+            colorscheme desert
+        endtry
+    endif
 endif
+"}}}
 
-" VimClojure
-let vimclojure#HighlightBuiltins = 1
-let vimclojure#HIghlightContrib = 1
-let vimclojure#DynamicHighighting = 1
-let vimclojure#ParenRainbow = 1
-let vimclojure#WantNailgun = 1
-let vimclojure#NailgunClient = "/usr/local/bin/ng"
+" Escape Keymaps {{{
+inoremap <silent> jj <ESC>
+inoremap <silent> <C-c> <ESC>
+"}}}
 
-let g:slimv_swank_clojure = '!osascript -e "tell app \"iTerm\"" -e "tell the first terminal" -e "set mysession to current session" -e "launch session \"Default Session\"" -e "tell the last session" -e "exec command \"/usr/local/bin/zsh\"" -e "write text \"cd $(pwd)\"" -e "write text \"lein swank\"" -e "end tell" -e "select mysession" -e "end tell" -e "end tell"'
+" Shougo/unite.vim"{{{
+if neobundle#tap('unite.vim')
+    " Unite {{{
+    nnoremap [unite] <Nop>
+    xnoremap [unite] <Nop>
+    nmap ; [unite]
+    xmap ; [unite]
+
+    " Source
+    nnoremap <silent> [unite]u :<C-u>Unite source -vertical -silent -start-insert<CR>
+    call neobundle#untap()
+endif
+"}}}
+

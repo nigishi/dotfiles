@@ -105,12 +105,6 @@ zstyle ':vcs_info:*' formats \
 zstyle ':vcs_info:*' actionformats \
   '(%{%F{white}%K{green}%}%s%{%f%k%})-[%{%F{white}%K{blue}%}%b%{%f%k%}|%{%F{white}%K{red}%}%a%{%f%k%}]'
 
-#precmd () {
-#  psvar=()
-#  LANG=en_US.UTF-8 vcs_info
-#  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-#}
-
 bar_left="%{${CYAN}%}${USER}($?) ${RESET}${WHITE}$ ${RESET}"
 bar_left_self="(%{%B%}%n%{%b%})"
 bar_left_status="(%{%B%F{white}%(?.%K{green}.%K{red})%}%?%{%k%f%b%})"
@@ -121,23 +115,6 @@ PROMPT="${bar_left}"$'\n'"${prompt_left}"
 RPROMPT='${RESET}${WHITE}[${GREEN}%(5~,%-2~/.../%2~,%~)% ${WHITE}]${RESET}'
 RPROMPT="%1(v|%F{green}%1v%f|)"
 RPROMPT="[%{%B%F{white}%K{magenta}%}%~%{%k%f%b%}]"
-
-#function powerline_precmd() {
-#  export PS1="$(~/powerline-shell.py $? --shell zsh)"
-#}
-#
-#function install_powerline_precmd() {
-#  for s in "${precmd_functions[@]}"; do
-#    if [ "$s" = "powerline_precmd" ]; then
-#      return
-#    fi
-#  done
-#  precmd_functions+=(powerline_precmd)
-#}
-#
-#install_powerline_precmd
-
-#PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 
 ## alias
 [[ -f ~/src/dotfiles/.zshrc.alias ]] && source ~/src/dotfiles/.zshrc.alias
@@ -157,7 +134,5 @@ esac
 
 ## boxen
 [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
-
-alias mylist='find `pwd` -maxdepth 1 -mindepth 1 | grep -v "\/\." > mylist'
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

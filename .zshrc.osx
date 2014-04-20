@@ -22,9 +22,6 @@ alias tm='tmuxx'
 alias tma='tmux attach'
 alias tml='tmux list-window'
 
-# autojump
-[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
-
 source ~/src/auto-fu.zsh/auto-fu.zsh
 function zle-line-init () {
   auto-fu-init

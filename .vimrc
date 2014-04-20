@@ -72,8 +72,6 @@ NeoBundle 'Shougo/vimproc'
 " }}}
 
 set hlsearch
-noremap <ESC><ESC> :nohlsearch<CR><ESC>
-
 set number
 
 " ColorScheme {{{
@@ -169,17 +167,43 @@ if has('vim_starting')
 endif
 "}}}
 
+" Normal Mode {{{
 nnoremap ; :
 nnoremap : ;
 
 nnoremap j gj
+vnoremap j gj
+nnoremap gj j
+vnoremap gj j
+
 nnoremap k gk
+vnoremap k gk
+nnoremap gk k
+vnoremap gk k
+
+nnoremap - $
+"}}}
 
 " Escape Keymaps {{{
 inoremap <silent> jj <ESC>
 inoremap <silent> <C-c> <ESC>
 "}}}
 
+" Search {{{
+" always 'very magic'
+nnoremap / /\v
+" search within visual block
+vnoremap / <esc>/\v%V
+" clear status
+nnoremap <silent><Esc><Esc>
+      \ :<C-u>nohlsearch<CR>
+
+" Automatically escape '/'
+cnoremap <expr>/ getcmdtype() == '/' ? '\/' : '/'
+
+nnoremap & :&&<CR>
+xnoremap & :&&<CR>
+"}}}
 
 " Shougo/unite.vim"{{{
 if neobundle#tap('unite.vim')

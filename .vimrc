@@ -126,6 +126,8 @@ NeoBundleLazy 'tell-k/vim-autopep8'
 NeoBundleLazy 'hynek/vim-python-pep8-indent'
 "}}}
 
+filetype plugin indent on
+
 " END NeoBundle}}}
 
 " Tab Basic Settings {{{
@@ -150,6 +152,8 @@ set nobackup "Don't make a backup before overwriting a file
 set nowritebackup "Don't make a backup before overwriting a file
 set backupdir-=. "List of directories for the backup file
 "}}}
+
+set clipboard=unnamed,autoselect
 
 " Colorscheme {{{
 if has('vim_starting')
@@ -617,3 +621,32 @@ if neobundle#tap('unite-codic.vim')
     call neobundle#untap()
 endif
 " }}}
+
+" jedi-vim {{{
+if neobundle#tap('jedi-vim')
+    call neobundle#config({
+        \ "autoload": {
+        \   "filetypes": ["python", "python3", "djangohtml"],
+        \ },
+        \ "build": {
+        \   "mac": "pip install jedi",
+        \   "unix": "pip install jedi",
+        \ }})
+    function! neobundle#tapped.hooks.on_source(bundle) "{{{
+        " Disable automatically set completeopt+=preview
+        let g:jedi#auto_vim_configuration = 0
+        " Disable automatically select the first entry that pops up
+        let g:jedi#popup_select_first = 0
+        " Disable automatically starts completion upon typing a period
+        let g:jedi#popup_on_dot = 0
+        " For quickrun
+        let g:jedi#rename_command = '<Leader>R'
+        " For gundo
+        let g:jedi#goto_assignments_command = '<Leader>G'
+        let g:jedi#completions_command = "<C-N>"
+    endfunction "}}}
+    call neobundle#untap()
+endif
+"}}}
+
+NeoBundleCheck

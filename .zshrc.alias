@@ -51,5 +51,5 @@ alias mv="mv -i"
 alias pd="pushd"
 alias po="popd"
 
-alias ev="vi ~/dotfiles/.vimrc"
-alias eza="vi ~/dotfiles/.zshrc.alias"
+alias ev="vi ~/.vimrc"
+alias eza="vi ~/.zshrc.alias"

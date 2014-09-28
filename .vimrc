@@ -15,11 +15,7 @@ augroup MyVimrc
 augroup END
 command! -nargs=* Autocmd autocmd MyVimrc <args>
 command! -nargs=* AutocmdFT autocmd MyVimrc FileType <args>
-function! s:hl_my_autocmd()
-    highlight def link myVimAutocmd vimAutoCmd
-    syntax match vimAutoCmd /\<\(Autocmd\|AutocmdFT\)\>/
-endfunction
-Autocmd BufWinEnter,ColorScheme *vimrc call s:hl_my_autocmd()
+Autocmd BufWinEnter
 
 " NeoBundle {{{
 if has('vim_starting')
@@ -52,12 +48,14 @@ else
 endif
 " }}}
 
-NeoBundleLazy 'Shougo/neosnippet.vim'
+NeoBundleLazy 'Shougo/neosnippet'
+NeoBundleLazy 'Shougo/neosnippet-snippets'
 NeoBundleLazy 'mattn/emmet-vim'
 NeoBundleLazy 'deris/vim-rengbang'
 NeoBundleLazy 'h1mesuke/vim-alignta'
 NeoBundleLazy 'autodate.vim'
 NeoBundleLazy 'tyru/caw.vim'
+NeoBundleLazy 'terryma/vim-multiple-cursors'
 " }}}
 
 " Development {{{
@@ -70,9 +68,6 @@ NeoBundleLazy 'rhysd/unite-codic.vim'
 " Library {{{
 NeoBundle 'Shougo/vimproc'
 " }}}
-
-set hlsearch
-set number
 
 " ColorScheme {{{
 NeoBundle 'tomasr/molokai'
@@ -131,12 +126,23 @@ filetype plugin indent on
 " END NeoBundle}}}
 
 " Tab Basic Settings {{{
+set list
+set number
+set wrap
+set textwidth=0
+set colorcolumn=80
 set autoindent "Copy indent from current line when starting a new line
 set expandtab "Use the appropriate number of spaces to insert a <Tab>
 set shiftround "Round indent to multiple of 'shiftwidth'
 set shiftwidth=4 "Number of spaces to use for each step of (auto)indent
 set softtabstop=4 "Number of spaces that a <Tab> counts for while editing operations
 set tabstop=4 "Number of spaces that a <Tab> in the file counts for
+set showmatch
+set matchtime=3
+set matchpairs& matchpairs+=<:>
+set t_vb=
+set novisualbell
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 "}}}
 
 " Search Basic Settings {{{
@@ -150,6 +156,7 @@ set hlsearch | nohlsearch "Highlight search patterns, support reloading
 "Don't create backup
 set nobackup "Don't make a backup before overwriting a file
 set nowritebackup "Don't make a backup before overwriting a file
+set noswapfile
 set backupdir-=. "List of directories for the backup file
 "}}}
 
@@ -204,6 +211,7 @@ nnoremap <silent><Esc><Esc>
 
 " Automatically escape '/'
 cnoremap <expr>/ getcmdtype() == '/' ? '\/' : '/'
+cnoremap <expr>? getcmdtype() == '?' ? '\?' : '?'
 
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
@@ -410,7 +418,13 @@ if neobundle#tap('vimfiler.vim')
     endfunction "}}}
 
     let g:vimfiler_safe_mode_by_default=0
+    let g:vimfiler_tree_leaf_icon = ' '
+    let g:vimfiler_tree_opened_icon = '▾'
+    let g:vimfiler_tree_closed_icon = '▸'
+    let g:vimfiler_file_icon = '-'
+    let g:vimfiler_marked_file_icon = '*'
     nnoremap <silent> ;vf :VimFilerBufferDir -split -simple -no-quit -winwidth=32<CR>
+    nnoremap <silent> ;ve :VimFilerBufferDir -quit<CR>
     nnoremap <silent> ;vt :VimFilerBufferDir -tab<CR>
 
     call neobundle#untap()
@@ -431,7 +445,7 @@ if neobundle#tap('vimshell.vim')
         \         'complete' : 'customlist,vimshell#complete'},
         \         'VimShellExecute', 'VimShellInteractive',
         \         'VimShellTerminal', 'VimShellPop'],
-        \   }
+        \       }
         \ })
     function! neobundle#tapped.hooks.on_source(bundle)
         " Use current directory as vimshell prompt.

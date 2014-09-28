@@ -76,7 +76,7 @@ cdpath=(~)
 chpwd_functions=($chpwd_functions dirs)
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
-SAVEHIS=$HISTSIZE
+SAVEHIST=$HISTSIZE
 setopt extended_history
 setopt hist_ignore_dups
 setopt hist_ignore_space

@@ -3,6 +3,10 @@ alias ls="ls -GF"
 alias la="ls -a"
 alias lf="ls -F"
 alias ll="ls -l"
+alias lla="ls -la"
+
+# history
+alias h="history"
 
 # du/df
 alias du="du -h"

@@ -34,6 +34,7 @@ NeoBundleLazy 'osyo-manga/unite-fold'
 NeoBundleLazy 'kmnk/vim-unite-giti'
 NeoBundleLazy 'thinca/vim-unite-history'
 NeoBundleLazy 'osyo-manga/unite-quickfix'
+NeoBundleLazy 'Shougo/neomru.vim'
 " }}}
 
 NeoBundleLazy 'Shougo/vimfiler.vim'
@@ -121,6 +122,26 @@ NeoBundleLazy 'tell-k/vim-autopep8'
 NeoBundleLazy 'hynek/vim-python-pep8-indent'
 "}}}
 
+" Golang {{{
+NeoBundleLazy 'fatih/vim-go'
+NeoBundleLazy 'vim-jp/vim-go-extra'
+"}}}
+
+" Scala {{{
+NeoBundleLazy 'derekwyatt/vim-scala'
+"}}}
+
+" Clojure {{{
+NeoBundleLazy 'guns/vim-clojure-static'
+NeoBundle 'kien/rainbow_parentheses.vim'
+NeoBundle 'tpope/vim-fireplace'
+NeoBundle 'tpope/vim-classpath'
+" }}}
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+
 filetype plugin indent on
 
 " END NeoBundle}}}
@@ -161,6 +182,10 @@ set backupdir-=. "List of directories for the backup file
 "}}}
 
 set clipboard=unnamed,autoselect
+
+if $GOROOT != ''
+    set rtp+=$GOROOT/misc/vim
+endif
 
 " Colorscheme {{{
 if has('vim_starting')

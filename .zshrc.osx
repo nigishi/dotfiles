@@ -36,7 +36,21 @@ alias tml='tmux list-window'
 zstyle ':auto-fu:var' postdisplay $''
 
 # python env
-#source /opt/boxen/homebrew/bin/virtualenvwrapper.sh
+## virtualenv, virtualenvwrapper
+which virtualenvwrapper.sh > /dev/null
+if [ $? -eq 0 ]; then
+    source `which virtualenvwrapper.sh`
+    mkdir -p ~/.virtualenvs
+    export WORKON_HOME=~/.virtualenvs
+    export PIP_RESPECT_VIRTUALENV=true
+fi
+
+# go
+if [ -x "`which go`" ]; then
+    export GOROOT=`go env GOROOT`
+    export GOPATH=$HOME/code/go-local
+    export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+fi
 
 # tmuxの自動起動
 if [ -z "$TMUX" ]; then

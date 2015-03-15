@@ -1,6 +1,6 @@
 # PATH
 export PATH=/usr/local/bin:/usr/local/sbin:~/shell:/usr/local/Cellar/ruby/2.0.0-p247/bin:~/bin:/opt/boxen/homebrew/bin:/Library/Ruby/Gems/2.0.0:/opt/boxen/nodenv/versions/v0.10.26/lib/node_modules:$PATH
-export PATH=~/.cabal/bin:$PATH
+export PATH=~/.cabal/bin:~/shell:$PATH
 
 # Terminal Colorの設定
 export CLICOLOR=1

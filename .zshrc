@@ -117,7 +117,7 @@ RPROMPT="%1(v|%F{green}%1v%f|)"
 RPROMPT="[%{%B%F{white}%K{magenta}%}%~%{%k%f%b%}]"
 
 ## alias
-[[ -f ~/src/dotfiles/.zshrc.alias ]] && source ~/src/dotfiles/.zshrc.alias
+[[ -f ~/dotfiles/.zshrc.alias ]] && source ~/dotfiles/.zshrc.alias
 
 case "${OSTYPE}" in
 ## Mac
@@ -135,4 +135,9 @@ esac
 ## boxen
 [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
 
+PATH=$HOME/.nodebrew/current/bin:$PATH
+PATH=$HOME/node_modules:$PATH
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

@@ -22,8 +22,9 @@ if has('vim_starting')
   set nocompatible
   set runtimepath& runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
+call neobundle#end()
 
 " Unite {{{
 NeoBundleLazy 'Shougo/unite.vim'
@@ -612,7 +613,15 @@ if neobundle#tap('vim-quickrun')
         let g:quickrun_config = {
                     \   "_" : {
                     \       "runner" : "vimproc",
-                    \       "runner/vimproc/updatetime" : 60
+                    \       "runner/vimproc/updatetime" : 60,
+                    \       "outputter/buffer/split" : ":botright",
+                    \       "outputter/buffer/close_on_empty" : 1
+                    \   },
+                    \   "cpp" : {
+                    \       "type" : "cpp/g++",
+                    \       "hook/add_include_option/enable" : 1,
+                    \       "hook/unite_quickfix/enable_full_data" : 1,
+                    \       "hook/close_buffer/enable_success" : 1
                     \   },
                     \}
         let g:quickrun_config.markdown = {
@@ -623,14 +632,9 @@ if neobundle#tap('vim-quickrun')
     endfunction
     nnoremap <Leader>q  <Nop>
     nnoremap <silent><Leader>qr :<C-u>QuickRun<CR>
+    nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
     vnoremap <silent><Leader>qr :QuickRun<CR>
 
-    let g:quickrun_config = {
-                \   "_" : {
-                \       "runner" : "vimproc",
-                \       "runner/vimproc/updatetime" : 60
-                \   },
-                \}
     if executable('pyflakes')
         let g:quickrun_config['syntax/python'] = {
                     \ 'command' : 'pyflakes',

@@ -1,6 +1,6 @@
 [user]
-    name = Yamamoto Yusuke
-    email = y.yamamoto88@gmail.com
+	name = Yamamoto Yusuke
+	email = y.yamamoto88@gmail.com
 [color]
     status = auto
     diff = auto
@@ -9,7 +9,7 @@
     grep = auto
     ui = true
 [core]
-    excludesfile = /opt/boxen/config/git/gitignore
+	excludesfile = /Users/yamamotoyusuke/.gitignore_global
     editor = vim
 [push]
     default = current
@@ -147,11 +147,11 @@
 [hub]
     protocol = https
 [difftool "sourcetree"]
-    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-    path = 
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
 [mergetool "sourcetree"]
-    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-    trustExitCode = true
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
 [filter "media"]
     clean = git-media-clean %f
     smudge = git-media-smudge %f

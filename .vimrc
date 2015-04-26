@@ -117,7 +117,6 @@ NeoBundle 'othree/html5.vim'
 NeoBundle 'plasticboy/vim-markdown'
 
 " Python {{{
-NeoBundleLazy 'davidhalter/jedi-vim'
 NeoBundleLazy 'heavenshell/vim-pydocstring'
 NeoBundleLazy 'tell-k/vim-autopep8'
 NeoBundleLazy 'hynek/vim-python-pep8-indent'
@@ -664,32 +663,5 @@ if neobundle#tap('unite-codic.vim')
     call neobundle#untap()
 endif
 " }}}
-
-" jedi-vim {{{
-if neobundle#tap('jedi-vim')
-    call neobundle#config({
-        \ "autoload": {
-        \   "filetypes": ["python", "python3", "djangohtml"],
-        \ },
-        \ "build": {
-        \   "mac": "pip install jedi",
-        \   "unix": "pip install jedi",
-        \ }})
-    function! neobundle#tapped.hooks.on_source(bundle) "{{{
-        " Disable automatically set completeopt+=preview
-        let g:jedi#auto_vim_configuration = 0
-        " Disable automatically select the first entry that pops up
-        let g:jedi#popup_select_first = 0
-        " Disable automatically starts completion upon typing a period
-        let g:jedi#popup_on_dot = 0
-        " For quickrun
-        let g:jedi#rename_command = '<Leader>R'
-        " For gundo
-        let g:jedi#goto_assignments_command = '<Leader>G'
-        let g:jedi#completions_command = "<C-N>"
-    endfunction "}}}
-    call neobundle#untap()
-endif
-"}}}
 
 NeoBundleCheck

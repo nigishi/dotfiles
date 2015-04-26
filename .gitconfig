@@ -9,7 +9,7 @@
     grep = auto
     ui = true
 [core]
-	excludesfile = /Users/yamamotoyusuke/.gitignore_global
+	excludesfile = /Users/ymmty/.gitignore_global
     editor = vim
 [push]
     default = current
@@ -142,8 +142,6 @@
     fhp = flow hotfix publish
     fs  = flow support
 
-[credential]
-    helper = /opt/boxen/bin/boxen-git-credential
 [hub]
     protocol = https
 [difftool "sourcetree"]

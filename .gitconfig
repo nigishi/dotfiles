@@ -1,5 +1,5 @@
 [user]
-	name = Yamamoto Yusuke
+	name = ymmty
 	email = y.yamamoto88@gmail.com
 [color]
     status = auto
@@ -153,3 +153,9 @@
 [filter "media"]
     clean = git-media-clean %f
     smudge = git-media-smudge %f
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
+[url "git@github.com:"]
+	pushinsteadof = https://github.com/

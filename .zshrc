@@ -116,6 +116,9 @@ RPROMPT='${RESET}${WHITE}[${GREEN}%(5~,%-2~/.../%2~,%~)% ${WHITE}]${RESET}'
 RPROMPT="%1(v|%F{green}%1v%f|)"
 RPROMPT="[%{%B%F{white}%K{magenta}%}%~%{%k%f%b%}]"
 
+## rbenv
+eval "$(rbenv init -)"
+
 ## alias
 [[ -f ~/dotfiles/.zshrc.alias ]] && source ~/dotfiles/.zshrc.alias
 
@@ -139,5 +142,22 @@ PATH=$HOME/.nodebrew/current/bin:$PATH
 PATH=$HOME/node_modules:$PATH
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
+
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+source ~/.zplug/init.zsh
+
+zplug 'zsh-users/zsh-autosuggestions'
+zplug 'zsh-users/zsh-completions'
+zplug 'zsh-users/zsh-syntax-highlighting'
+zplug 'mollifier/anyframe'
+
+if ! zplug check --verbose; then
+  printf 'Install? [y/N]: '
+  if read -q; then
+    echo; zplug install
+  fi
+fi
+
+zplug load --verbose

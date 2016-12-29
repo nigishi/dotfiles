@@ -1,10 +1,12 @@
 # PATH
-export PATH=/usr/local/bin:/usr/local/sbin:~/shell:/usr/local/Cellar/ruby/2.0.0-p247/bin:~/bin:/opt/boxen/homebrew/bin:/Library/Ruby/Gems/2.0.0:/opt/boxen/nodenv/versions/v0.10.26/lib/node_modules:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:~/shell:~/bin:/opt/boxen/homebrew/bin:~/.rbenv/shims:$PATH
 export PATH=~/.cabal/bin:~/shell:$PATH
+export PATH=~/Downloads/go_appengine:$PATH
 
 # Terminal Colorの設定
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 
 # vim
 #export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
@@ -53,17 +55,17 @@ if [ -x "`which go`" ]; then
 fi
 
 # tmuxの自動起動
-if [ -z "$TMUX" ]; then
-    if type tmuxx >/dev/null 2>&1; then
-        tmuxx
-    elif type tmux >/dev/null 2>&1; then
-        if tmux has-session && tmux list-sessions | /usr/bin/grep -qE '.*]#$'; then
-            tmux attach && echo "tmux attached session "
-        else
-            tmux new-session && echo "tmux created new session"
-        fi
-    fi
-fi
+#if [ -z "$TMUX" ]; then
+#    if type tmuxx >/dev/null 2>&1; then
+#        tmuxx
+#    elif type tmux >/dev/null 2>&1; then
+#        if tmux has-session && tmux list-sessions | /usr/bin/grep -qE '.*]#$'; then
+#            tmux attach && echo "tmux attached session "
+#        else
+#            tmux new-session && echo "tmux created new session"
+#        fi
+#    fi
+#fi
 
 # z.sh
 _Z_CMD=j

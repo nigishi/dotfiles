@@ -24,11 +24,8 @@ alias java='java -Dfile.encoding=UTF-8'
 alias v="vim"
 alias vi="vim"
 
-# emacs
-alias emacs="emacsclient"
-
-# Sublime Text 3
-alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+# Atom
+alias a="atom"
 
 # git
 alias g="git"
@@ -41,7 +38,7 @@ alias gci="git commit -a"
 # tmux
 alias tm="tmux"
 
-# brew 
+# brew
 alias b="brew"
 alias bup="brew update"
 alias bug="brew upgrade"

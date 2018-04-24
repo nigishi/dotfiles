@@ -1,36 +1,35 @@
-"   __  __ _ _____ _________
-"   "   \ \ | |_|     V  __/  __|
-"   "    \ \| | | | | | |  | [__
-"   " [_] \___|_|_|_|_|_|  \____|
-"
-"
-
-let mapleader = ","
-
-nnoremap <Leader>w :w<CR>
-
-" Encoding {{{
-set encoding=utf-8
-scriptencoding utf-8
-set guifont=Fira\ Code:h2
-" }}}
-
-" MyVimrc {{{
-augroup MyVimrc
-  autocmd!
-augroup END
-command! -nargs=* Autocmd autocmd MyVimrc <args>
-command! -nargs=* AutocmdFT autocmd MyVimrc FileType <args>
-" }}}
-
 set number
-set clipboard+=unnamed
+set ignorecase
+set smartcase
+set smartindent
+set wrapscan
+set incsearch
+set hlsearch
+nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
-" Normal Mode {{{
+set history=10000
+
+set display=lastline
+set showmatch
+set matchtime=1
+
+set showcmd
+
 nnoremap ; :
 nnoremap : ;
 
-" Escape Keymaps {{{
+nnoremap j gj
+nnoremap k gk
+
 inoremap <silent> jj <ESC>
-inoremap <silent> <C-c> <ESC>
-"}}}
+
+let mapleader = "\<Space>"
+nmap <Leader><Leader> V
+nnoremap <Leader>w :w<CR>
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+

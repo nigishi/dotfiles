@@ -12,6 +12,7 @@ nnoremap <Leader>w :w<CR>
 " Encoding {{{
 set encoding=utf-8
 scriptencoding utf-8
+set guifont=Fira\ Code:h2
 " }}}
 
 " MyVimrc {{{

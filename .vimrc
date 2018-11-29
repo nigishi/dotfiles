@@ -5,6 +5,8 @@ set smartindent
 set wrapscan
 set incsearch
 set hlsearch
+
+set expandtab
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 set history=10000
@@ -32,4 +34,3 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
-

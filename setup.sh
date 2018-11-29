@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/bash
 
 DOT_FILES=( .vimrc .gitconfig .gitignore .tmux.conf .dir_colors )
 

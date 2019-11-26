@@ -5,7 +5,6 @@ DOT_FILES=(
 .gitconfig
 .gitignore 
 .tmux.conf 
-.dir_colors
 )
 
 if [ ! -d ~/.tmux/plugins/tpm ]; then

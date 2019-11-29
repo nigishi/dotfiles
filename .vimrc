@@ -17,8 +17,8 @@ set matchtime=1
 
 set showcmd
 
-nnoremap ; :
-nnoremap : ;
+#nnoremap ; :
+#nnoremap : ;
 
 nnoremap j gj
 nnoremap k gk

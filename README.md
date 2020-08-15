@@ -2,4 +2,4 @@ dotfiles
 ========
 ### setup
 
-    bash .bin/setup.sh
+    bash setup.sh

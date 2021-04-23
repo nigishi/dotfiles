@@ -17,4 +17,4 @@ do
 done
 
 mkdir -p $HOME/.config/fish
-ln -fs `pwd`/.fish/config.fish $HOME/.config/fish/config.fish 
+ln -fs `pwd`/config.fish $HOME/.config/fish/config.fish 

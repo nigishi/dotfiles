@@ -15,6 +15,17 @@ alias tmux-sb-qfx='tmux source-file ~/dotfiles/tmux/sb-qfx.conf'
 alias tmux-fkcn='tmux source-file ~/dotfiles/tmux/fkcn.conf'
 alias tmux-kolla='tmux source-file ~/dotfiles/tmux/kolla.conf'
 alias tmux-k8smc='tmux source-file ~/dotfiles/tmux/k8smc.conf'
+alias wr='claude-code -f ~/prompts/weekly_review_prompt.txt'
+
+abbr -a gco git checkout
 set -x GOPATH $HOME/go/
 set -x PATH /opt/homebrew/bin/ $PATH
 set -x PATH $HOME/dev/flutter/bin $PATH
+set -x PATH ~/miniforge3/bin $PATH
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /Users/yamamoto/.lmstudio/bin
+
+# Added by Windsurf
+fish_add_path /Users/yamamoto/.codeium/windsurf/bin
+fish_add_path $HOME/.local/bin
